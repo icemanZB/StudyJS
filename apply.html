@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <script type="text/javascript">
+        /*
+
+         * 使用call 或者 apply 来扩充作用域的最大好处,就是
+         * 对象不需要与方法发生任何耦合关系
+         *
+         * */
+
+        function box(num1, num2) {
+            return num1 + num2;
+        }
+        // this 表示window作用域, [] 表示传递参数
+        // apply 和 call 是一样的
+        function sum(num1, num2) {
+            return box.apply(this, [num1, num2]);
+        }
+
+        alert(sum(10, 10));
+
+        var color = '红色的';
+
+        var box = {
+            color: '蓝色的'
+        };
+
+        function sayColor() {
+            alert(this.color);
+        }
+
+        sayColor(); // 全局
+
+        // 冒充box 作用域在box 对象里面
+        sayColor.call(box);  // 蓝色的
+		
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

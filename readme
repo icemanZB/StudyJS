@@ -1,0 +1,214 @@
+如何添加事件:
+function abc(){
+}
+1、直接调用:abc();
+2、事件调用:元素.事件 = 函数名 oDiv.onclick = abc;
+3、function (){}		匿名函数
+4、元素.事件 = function (){};  oDiv.onclick=function(){};
+
+技巧
+
+1、 可以设置开关来创造条件 var onOff=true;
+    // 图片切换
+    var oImg = document.getElementById('img1');
+    var onOff = true;
+    oImg.onclick = function (){
+    	if( onOff ){
+    		oImg.src = 'img/4.jpg';
+    		onOff = false;
+    	} else {
+    		oImg.src = 'img/2.jpg';
+    		onOff = true;
+    	}
+    };
+
+2、 有数组的地方,最好准备一个数字,这样可以和数组结合起来用,类似创建一个数组的下标
+
+3、document.getElementById 于 document.getElementsByTagName 的区别
+   (1） getElementById 前面只能用 document 而 getElementsByTagName 前面可以更别的元素
+        例如:    var oUl = document.getElementById('list');
+            	var aLi = oUl.getElementsByTagName('li');
+   (2) getElementById : 找到的是一个元素
+       getElementsByTagName :  找到的是元素的集合 aLi => [ li, li, li ]
+
+   (3) getElementsByTagName 是动态方法 getElementById :静态方法
+       例如 : window.onload = function (){
+            	var aBtn = document.getElementsByTagName('input');
+            	document.body.innerHTML = '<input type="button" value="按钮" />
+            	<input type="button" value="按钮" /><input type="button" value="按钮" />';
+            	// alert(aBtn.length);  3
+                aBtn[0].onclick = function (){ alert(1); };
+            };
+4、取模的技巧
+   var arr=['red','orange','yellow','green','blue'];
+   for(var i=0;i<5;i++){
+       console.info(i % arr.length); // 0 1 2 3 4
+   }
+   $(function(){
+          var str="";
+          var arr=['red','orange','yellow','green','blue'];
+          $("#btn").click(function(){
+              for(var i=0;i<11;i++){
+                  var moveL=i*55;
+                  var bgColor=arr[i % arr.length];
+                  str+="<li style='left:"+moveL+"px; background:"+bgColor+";'>"+i+"</li>";
+              }
+              $("#list").append(str);
+          });
+
+   })
+
+
+
+注意事项
+
+ 1、所有的相对路径地址,不能做为判断条件(img src href )
+    例子 : // img/1.jpg 原始路径
+       	 // file:///C:/Users/Administrator/Desktop/11-4-JS1/img/1.jpg // 获得路径
+    图片的相对路径不能读,但是可以写!
+
+ 2、颜色值 : color: red #f00 rgb() rgba()  颜色值也不能拿来做判断
+
+ 3、innerHTML 的值也不能拿来做判断,有兼容性问题?
+
+ 4、不要修改表单元素的type值,IE6 7 8 不支持,会报错
+
+ 5、修改浮动的兼容问题 , 可以通过写样式来回避这个问题.{float:left} .right{float:right;}
+    然后再是oDiv.className='left';
+
+    oDiv.style.float = 'right';     // 有兼容问题
+   	oDiv.style.styleFloat = 'right';		// IE styleFloat
+   	oDiv.style.cssFloat = 'left';			// 非IE cssFloat
+
+ 6、this 指向问题
+   	function fn(){
+   	    this
+   	}
+    (1) fn();   this->window
+    (2) oDiv.onclick=fn;  this->oDiv
+    (3) oDiv.onclick=function(){
+            this;   thi->oDiv
+        }
+    (4) oDiv.onclick=function(){
+           fn();   fn()里面的this->window
+        }
+    (5) <div onclick="this"></div>    this->div
+    (6) <div onclick="fn();"></div>   fn()里面的this->window
+    (7) funtion fn(obj){
+            obj->window
+        }
+        fn(this);
+    (8) oDiv.onclick=function(){
+            fn(this);
+        }
+        function fn(obj){
+            obj->Odiv
+        }
+ 7、for循环中的i 与自定义属性
+    window.onload = function (){
+    	var aBtn = document.getElementsByTagName('input');
+    	for( var i=0; i<aBtn.length; i++ ){
+    		aBtn[i].index = i;			// 自定义属性（索引值）
+    		aBtn[i].onclick = function (){
+    			// alert( i );			// 这边永远得到的是3
+    			alert( this.index );
+    		};
+    	}
+    };
+
+思路
+1、 自动生成一组新闻
+    (1)、按钮找麻烦 （用户体验不太好） oBtn.disabled = true; / oBtn.style.display = 'none';
+    (2)、先清空，再生成 oUl.innerHTML = '';
+    (3)、判断
+
+<input id="btn1" type="button" value="自动生成5条新闻" />
+<ul id="list" style="border:1px solid red;"></ul>
+<script>
+window.onload = function (){
+	var oBtn = document.getElementById('btn1');
+	var oUl = document.getElementById('list');
+	var arr = [
+		'山西省委附近多次爆炸 官方称尚不确定是恐怖袭击',
+		'甘肃张掖明令禁止转基因 书记:无力辨别只能禁止',
+		'多地制定雾霾预案限行限排被批治标不治本',
+		'韩媒抱怨中国雾霾侵袭韩国 称其为"黑色灾难" ',
+		'伊朗革命卫队高官在叙利亚当"志愿者"被杀(图)'
+	];
+	var onOff = true; // 做个开关
+	oBtn.onclick = function (){
+		if( onOff ) {
+			for( var i=0; i<arr.length; i++ ){
+				oUl.innerHTML += '<li>' + arr[i] + '</li>';
+			}
+			onOff = false;
+		}
+		onOff = false;
+	};
+};
+</script>
+
+2、自定义属性, 一般用在有匹配关系,需要一一对应,或者匹配某些数组里面的值
+li { list-style:none; width:114px; height:140px;
+ background:url(img/normal.png); float:left; margin-right:20px; }
+<script>
+window.onload = function (){
+	var aLi = document.getElementsByTagName('li');
+	// var onOff = true;	// 只能控制一组！
+	for( var i=0; i<aLi.length; i++ ){
+		aLi[i].onOff = true;
+		aLi[i].onclick = function (){
+			if ( this.onOff ) {
+				this.style.background = 'url(img/active.png)';
+				this.onOff = false;
+			} else {
+				this.style.background = 'url(img/normal.png)';
+				this.onOff = true;
+			}
+		};
+	}
+};
+</script>
+<ul>
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+<input type="button" value="btn1" />
+<input type="button" value="btn2" />
+<input type="button" value="btn3" />
+<script>
+window.onload = function (){
+	var aBtn = document.getElementsByTagName('input');
+	// 想建立“匹配”“对应”关系，就用索引值
+	var arr = [ '莫涛', '张森', '杜鹏' ];
+	for( var i=0; i<aBtn.length; i++ ){
+		aBtn[i].index = i;			// 自定义属性（索引值）
+		aBtn[i].onclick = function (){
+			// alert( arr[ this.index ] );
+			this.value = arr[ this.index ];
+		};
+	}
+};
+</script>
+
+3、 选项卡思路
+
+<li class="active"></li>
+<li></li>
+<li></li>
+<li></li>
+
+
+// 思路一：全部清空，当前添加
+for( var i=0; i<aLi.length; i++ ){
+    aLi[i].className = '';
+}
+this.className = 'active';
+
+/*
+// 思路二：清空上个，当前添加
+oldLi.className = '';
+oldLi = this;
+this.className = 'active';
+*/

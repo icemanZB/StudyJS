@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			window.onload=function(){
+				var oUl=document.getElementById("ul1");
+
+				// 子节点 只算第一层 span 就获取不到
+				for (var i=0;i<oUl.childNodes.length;i++) {
+					//nodeType 1 元素节点    3 文本节点
+					if(oUl.childNodes[i].nodeType==1){
+						oUl.childNodes[i].style.background='red';
+					}
+				}
+
+				// 建议使用 children 他不会包含文本节点
+				for (var i=0;i<oUl.children.length;i++) {
+
+				}
+
+				// firstElementChild 和 firstChild
+				if(oUl.firstElementChild){
+					oUl.firstElementChild.style.background='green';
+				}else{
+					oUl.firstChild.style.background='green';
+				}
+
+				console.info(oUl.childNodes.length);
+			}
+		</script>
+	</head>
+	<body>
+		<ul id="ul1">
+			<li><span>aaaa</span></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</body>
+</html>

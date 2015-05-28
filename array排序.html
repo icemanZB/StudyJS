@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>数组排序</title>
+		<script type="text/javascript">
+			/*
+			 
+			 * sort  是引用，原数组也被改变了
+			 * 
+			 * */
+			var arr = [0, 1, 5, 10, 15];
+			
+			// 从小到大排序
+			arr.sort(function(n1,n2){
+				return n1-n2;
+			}); 
+			
+			console.info(arr);
+			
+			/*
+			 
+			 *	 reverse
+			 * 
+			 *  必需的 arrayObj 引用是 Array 对象。
+			 *  reverse 方法将一个 Array 对象中的元素按所在位置进行反转。 
+			 *  在执行过程中，此方法并不创建新 Array 对象。
+			 *  说明是引用
+			 * 
+			 * */
+			var arr2 = [1, 2, 3, 4, 5];
+			console.info(arr2.reverse());
+			console.info(arr2); //原数组也被逆序了。 
+			console.info(typeof arr2.reverse()); //方法执行后返回一个逆序后的数组
+			
+
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

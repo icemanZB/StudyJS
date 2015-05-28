@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			/*
+			 
+			 * string 类型包含了一些特殊字符的字面量，也叫转义字符
+			 * 
+			 * \n    换行
+			 * \t	 空出 tab 距离
+			 * \'	 打出'  加\ 转义
+			 * \b    空格
+			 * \r    回车
+			 * 
+			 * 16进制代码  表示一个Unicode字符  \u03a3
+			 *
+			 * 字符串一旦创建就不能改,要改变某个变量保存的字符串, 先要
+			 * 
+			 * 销毁原来的字符串,然后用另一个包含新值的字符串填充该变量(底层的原理)
+			 * 
+			 * 指针不停的在换引用
+			 * 
+			 * toString(2) 转二进制字符串
+			 * 
+			 * toString() 不能转null 和undefined 类型 报错
+			 * 
+			 * String()  强制转换 可以  String(null);   // 'null'
+			 * 
+			 * var box;
+			 * String(box);  // 'undefined'
+			 * 
+			 * */
+			
+			var box=true;
+			
+			console.info(box.toString());  // 'true' 字符串true
+			
+			var str='Iceman is genius';
+			console.info(str.length);
+			console.info(str.constructor);  // 不常用
+			console.info(str.charAt(1)); // c 返回指定下标的值,下标从0开始
+			console.info(str.charCodeAt(1));  // 99 返回指定下标的acssii码
+			console.info(str[1]); // c 但是IE不兼容 (不建议使用)
+			
+			//  字符串操作方法
+			console.info(str.concat(' and',' clever',' !')); // 字符串链接
+			console.info(str.slice(2,4)); // em 字符串截取
+			console.info(str.substring(2,4)); // em
+			console.info(str.substr(2,4)); // eman 从第2个开始选4个
+			console.info(str.slice(2)); // eman
+			console.info(str.substring(2)); // eman
+			console.info(str.substr(2)); // eman
+			/*
+			 
+			 * IE 浏览器遇到负值会全部返回
+			 * 不建议使用负值
+			 * */
+			console.info(str.slice(-2)); // an (总的字符串长度+(-2))
+			console.info(str.substring(-2)); // Iceman 负数返回全部字符串
+			console.info(str.substr(-2)); // an 总的字符串长度+(-2))
+			console.info(str.slice(2,-1)); // ema (6-1)
+			console.info(str.slice(-2,-1)); // a (6-2),(6-1)
+			// Ic  第二个参数为负 直接返回0, 如果第二个参数比第一个参数小,第二个参数提前
+			console.info(str.substring(2,-1)); 
+			console.info(str.substr(2,-1)); // ''  第二个参数为负直接返回0
+			
+			console.info(str.indexOf('i')); // 返回从初始位置搜索I的位置的索引值 第一次出现的位置
+			console.info(str.lastIndexOf('i')); // 返回从末尾位置搜索I的位置的索引值 第一次出现的位置
+			console.info(str.indexOf('i',5)); // 从第五个位置开始搜索I
+			console.info(str.lastIndexOf('i',5));// 从第五个位置开始向前搜索搜索I第一次出现的位置
+			console.info(str.indexOf(',')); // 不存在返回-1
+			
+			var arr=[];
+			var pos=str.indexOf('i');
+			while(pos>-1){
+				arr.push(pos);
+				pos=str.indexOf('i',pos+1);
+			}
+			console.info(arr);
+			
+			console.info(str.toLowerCase()); // 转为小写
+			console.info(str.toUpperCase()); // 转为大写
+			console.info(str.match('I')); // 找到I 即返回I 若没有找到返回null
+			console.info(str.search('1I')); // 找到返回下标,找不到返回-1
+			console.info(typeof(str.replace('I','L'))); // 替换 返回该字符串
+			console.info(str.split(' ')); // 按照空格切割  返回数组
+			
+			
+			
+			
+		</script>
+	</head>
+	<body>
+		
+	</body>
+</html>

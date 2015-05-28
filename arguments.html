@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>arguments 动态传参</title>
+		<script type="text/javascript">
+			function box(){
+				return arguments[0]+'|'+arguments[1]+'|'+arguments[2];
+			}
+			
+			console.info(box('Iceman',25,'IT'));
+			
+			/*
+			 
+			 * arguments 的应用 
+			 * 
+			 * 任意个参数求和
+			 * 
+			 * */
+			function sum(){
+				var sum=0;
+				for(var i=0;i<arguments.length;i++){
+					sum +=arguments[i];
+				}
+				return sum;
+			}
+			
+			console.info(sum(1,2,3));
+			
+			// 使用 arguments.callee() 调用自身  实现递归
+			function factorial(num){
+				if(num<=1){
+					return 1;
+				}else{
+					return num*arguments.callee((num-1));
+				}
+			}
+			
+			console.info(factorial(4));
+			
+			// callee能够打印其本身
+			function calleeDemo() {
+			  	alert(arguments.callee);
+			}
+			
+			calleeDemo();
+
+		</script>
+	</head>
+
+	<body>
+
+	</body>
+
+</html>

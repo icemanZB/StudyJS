@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<title>array</title>
+		<script type="text/javascript">
+			var arr1 = [1, 2, ]; // 额外的逗号会让IE获取到，而参数错误
+			console.info(arr1.length); // IE 3 FF 2
+
+			var arr2 = [];
+			arr2['name'] = 'Iceman';
+			arr2['age'] = 25;
+			console.info(arr2); // 为空对象 , 不是数组
+			console.info(arr2['name']); // 如果是字符串下标，不会体现在数组上，而要单独拎出来
+			console.info(arr2.name);
+            console.info(arr2.length-1); // 访问数组的最后一个
+
+			var arr3 = [];
+			arr3[0] = 'Iceman';
+			arr3[1] = 28;
+			console.info(arr3); // 如果是索引下标，就会在数组上体现出来
+
+			 // 数组中在最后追加元素
+			var arr4 = ['Iceman', 28, 'ShangHai'];
+			arr4[arr4.length] = 'Computer'; // 使用.length获得最后一个下标值
+            arr4.push('呵呵呵');
+			console.info(arr4[3]);
+
+			 // 数组中的对象元素可以是任意的
+
+			var box = [{
+					name: 'Iceman',
+					age: 25
+				},
+				[3, 4, 6, 'ShangHai', new Object()],
+				'Computer',
+				25 + 25,
+				new Array(1, 2, 3)
+			];
+			console.info(box);
+			console.info(box[0]['name']);
+
+			/*
+
+			 * 数组的链接
+			 *
+			 * 基于当前数组创建新的数组后追加一个元素
+			 *
+			 * */
+			var arr10 = ['Iceman', 25, 'ShangHai'];
+			var arr11 = arr10.concat('Computer');
+			console.info(arr11);
+			console.info(arr10);
+
+			var arr7 = ['Iceman', 25, 'ShangHai'];
+			console.info(arr7.push('Computer')); // 给数组末尾添加了N个元素，并返回数组最新长度
+			console.info(arr7);
+			console.info(arr7.pop()); // 移除数组最后的元素，并且返回移除的元素
+			console.info(arr7.shift()); // 移除数组开头的一个元素，并且返回这个元素
+			 //给数组前端添加一个元素，并且返回最新的长度 ,IE浏览器返回undefined (不建议使用)
+			console.info(box.unshift('Iceman'));
+
+
+
+
+
+		</script>
+	</head>
+
+	<body>
+
+	</body>
+
+</html>

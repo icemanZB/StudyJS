@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			div { padding: 100px;}
+		</style>
+	</head>
+	<body>
+		<!--
+			当里面的div被点击了之后，他会传递到他的父级
+			然后他的父级会传递到他的父级的父级,这个就是事件冒泡
+			
+			-->
+		<div style="background: #CCCCCC;" onclick="alert(this.style.background);">
+			<div style="background: green;" onclick="alert(this.style.background);">
+				<div style="background: red;" onclick="alert(this.style.background);">
+					
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
