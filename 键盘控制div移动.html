@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#div1{width: 100px;height: 100px;background: #CCCCCC;position: absolute;}
+		</style>
+		<script type="text/javascript">
+			document.onkeydown=function(ev){
+				// 做哪些事件才不会顿一下
+				var oEvent=ev||event;
+				var oDiv=document.getElementById("div1");
+				if(oEvent.keyCode==37){
+					oDiv.style.left=oDiv.offsetLeft-10+'px';
+				}else if(oEvent.keyCode==39){
+					oDiv.style.left=oDiv.offsetLeft+10+'px';
+				}
+			};
+		</script>
+	</head>
+	<body>
+		<div id="div1">
+			
+		</div>
+	</body>
+</html>

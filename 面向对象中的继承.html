@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <!-- <script type="text/javascript" src="js/apply2.js"></script> -->
+<script type="text/javascript">
+  // 临时中转函数
+  function obj(o) { // o 将要传入的对象
+    function F() {} // F临时新建的对象, 用来存储传递过来的对象
+    F.prototype = o;
+    return new F();
+  }
+
+
+  var jackson = {
+    age: 36,
+    weight: 130
+  };
+
+  // 寄生函数
+  function create1(o) {
+    var f = obj(o);
+    f.run = function() {
+      return this.weight;
+    };
+    return f;
+  }
+
+  var objJackson = obj(jackson);
+  console.info(objJackson.age);
+
+  var box1 = create1(jackson);
+  console.info(box1.run());
+  // 寄生组合继承 (雅虎框架)
+
+  function create2(box2, desk2) {
+    var f = obj(box2.prototype);
+    f.constructor = desk2; // 调整原型构造指针
+    desk2.prototype = f;
+  }
+
+  function Box2(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  Box2.prototype.getName = function() {
+    return this.name;
+  }
+
+  function Desk2(name, age) {
+    Box2.call(this, name, age);
+  }
+
+  // 寄生组合 来继承
+  create2(Box2, Desk2); // 这句话就是 Desk2.prototype=new Box2();
+
+  var de = new Desk2('Iceman');
+  console.info(de.getName());
+</script>
+</head>
+<body>
+
+</body>
+</html>

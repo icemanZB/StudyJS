@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script type="text/javascript">
+			function toDouble(n) {
+				if (n < 10) {
+					return '0' + n;
+				} else {
+					return '' + n; // 加个空字符串，为了保证返回出去的类型是string
+				}
+			}
+			window.onload = function() {
+				var aImg = document.getElementsByTagName('img');
+
+				function tick() {
+					var oDate = new Date();
+					var str = toDouble(oDate.getHours()) + toDouble(oDate.getMinutes()) + toDouble(oDate.getSeconds());
+					for (var i = 0; i < aImg.length; i++) {
+						aImg[i].src = 'img/数码时钟/' + str.charAt(i) + '.png';
+					}
+				}
+				setInterval(tick, 1000);
+				
+				tick(); // 先执行一次tick, 1秒过后就会执行定时器
+			}
+		</script>
+	</head>
+
+	<body style="background: black; color: white; font-size: 50px;">
+		<img src="img/数码时钟/0.png" />
+		<img src="img/数码时钟/0.png" /> ：
+		<img src="img/数码时钟/0.png" />
+		<img src="img/数码时钟/0.png" /> ：
+		<img src="img/数码时钟/0.png" />
+		<img src="img/数码时钟/0.png" />
+	</body>
+
+</html>

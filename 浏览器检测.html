@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<script src="js/browserdetect.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			console.info(navigator.userAgent); // 展现浏览器信息
+			 // console.info(navigator.platform); // 浏览器所在系统
+			console.info(BrowserDetect.browser); // 浏览器名称
+			console.info(BrowserDetect.version); // 浏览器版本
+			console.info(BrowserDetect.OS); // 浏览器所在系统
+			 //给IE7一下的浏览器做特殊处理
+			if (BrowserDetect.browser == 'Internet Explorer' && BrowserDetect.version < 7) {
+				alert('需要做IE低版本的兼容！');
+			}
+
+			 //检测非IE浏览器插件是否存在
+
+			function hasPlugin(name) {
+				var name = name.toLowerCase();
+				for (var i = 0; i < navigator.plugins.length; i++) {
+					if (navigator.plugins[i].name.toLowerCase().indexOf(name) > -1) {
+						return true;
+					}
+				}
+				return false;
+			}
+
+			console.info(hasPlugin('Flash'));
+
+			 //检测IE浏览器的控件 工具- 管理加载项
+			function hasIEPlugin(name) {
+				try {
+					new ActiveXObject(name) //这里的name必须是控件的唯一标识符ID
+					return true; //如果new 成功了，没有产生错误，那么就不去执行catch
+				} catch (e) {
+					return false; //如果new 失败了，就执行catch里面的语句
+				}
+			}
+			console.info(hasIEPlugin('ShockwaveFlash.ShockwaveFlash'));
+
+			function hasFlash() {
+				//首先，先去检测非IE的浏览器
+				var result = hasPlugin('Flash'); //如果返回true，说明检测到了，并且不是IE浏览器
+				if (!result) { //如果没有检测到，说明这个浏览器没有flash插件，或者它可能是IE浏览器
+					result = hasIEPlugin('ShockwaveFlash.ShockwaveFlash');
+				}
+				return result;
+			}
+
+			console.info(hasFlash());
+		</script>
+	</head>
+
+	<body>
+	</body>
+
+</html>

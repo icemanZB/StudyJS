@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>取消冒泡的应用</title>
+		<style type="text/css">
+			#div1{width: 400px;height: 300px;background: #CCCCCC; display: none;}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var oBtn = document.getElementById("btn");
+				var oDiv = document.getElementById("div1");
+				oBtn.onclick = function(ev) {
+					var oEvent = ev || event;
+					oDiv.style.display = 'block';
+					oEvent.cancelBubble = true; // 取消冒泡
+				};
+
+				document.onclick = function() {
+					oDiv.style.display = 'none';
+				};
+
+			}
+		</script>
+	</head>
+
+	<body>
+		<input type="button" id="btn" value="显示" />
+		<div id="div1">
+
+		</div>
+	</body>
+
+</html>

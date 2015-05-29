@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#parent {
+				width: 600px;
+				height: 20px;
+				background: #ccc;
+				position: relative;
+				margin: 10px auto;
+			}
+			#div1 {
+				width: 20px;
+				height: 20px;
+				background: red;
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+			#div2 {
+				width: 300px;
+				height: 300px;
+				background: green;
+				filter: alpha(opacity=0);
+				opacity: 0;
+			}
+			#div3 {
+				width: 400px;
+				height: 300px;
+				border: 1px solid black;
+				overflow: hidden;
+				position: relative;
+			}
+			#div4 {
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload = function() {
+				var oDiv = document.getElementById("div1");
+				var oParent = document.getElementById("parent");
+				var oDiv2 = document.getElementById("div2");
+				var oDiv3 = document.getElementById("div3");
+				var oDiv4 = document.getElementById("div4");
+				var disX = 0;
+				oDiv.onmousedown = function(ev) {
+					var oEvent = ev || event;
+					disX = oEvent.clientX - oDiv.offsetLeft;
+					if (oDiv.setCapture) {
+						oDiv.onmousemove = mouseMove;
+						oDiv.onmouseup = mouseUp;
+						oDiv.setCapture();
+					} else {
+						document.onmousemove = mouseMove;
+						document.onmouseup = mouseUp;
+					}
+
+					function mouseMove(ev) {
+						var oEvent = ev || event;
+						var oDivLeft = oEvent.clientX - disX;
+						if (oDivLeft < 0) {
+							oDivLeft = 0;
+						} else if (oDivLeft > oParent.offsetWidth - oDiv.offsetWidth) {
+							oDivLeft = oParent.offsetWidth - oDiv.offsetWidth;
+						}
+						oDiv.style.left = oDivLeft + 'px';
+						// 比例
+						var scale = oDivLeft / (oParent.offsetWidth - oDiv.offsetWidth);
+
+						//oDiv2.style.width=400*scale+'px';
+						//oDiv2.style.height=400*scale+'px';
+						//oDiv2.style.filter='alpha(opacity='+scale*100+')';
+						//oDiv2.style.opacity=scale;
+						
+						oDiv4.style.top=-scale*(oDiv4.offsetHeight-oDiv3.offsetHeight)+'px';
+					}
+
+					function mouseUp(ev) {
+						this.onmousemove = null;
+						this.onmouseup = null;
+						if (oDiv.releaseCapture) {
+							oDiv.releaseCapture();
+						}
+					}
+					return false;
+				};
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="parent">
+			<div id="div1">
+
+			</div>
+		</div>
+		<div id="div3">
+			<div id="div4">
+				Python Socket 编程——聊天室示例程序 上一篇 我们学习了简单的 Python TCP Socket 
+				编程， 通过分别写服务端和客户端的代码了
+				解基本的 Python Socket 编程模型。
+				本文再通过一个例子来加强一下对 Socket 编
+				程的理解。聊天室程序需求我们要实现的是简单的聊天室的例子， 
+				就是允许多个人同时一起聊天，每个人发送的消息所...
+				Python Socket 编程——聊天室示例程序 上一篇 我们学习了简单的 Python TCP Socket 
+				编程， 通过分别写服务端和客户端的代码了
+				解基本的 Python Socket 编程模型。
+				本文再通过一个例子来加强一下对 Socket 编
+				程的理解。聊天室程序需求我们要实现的是简单的聊天室的例子， 
+				就是允许多个人同时一起聊天，每个人发送的消息所...
+				编程， 通过分别写服务端和客户端的代码了
+				解基本的 Python Socket 编程模型。
+				本文再通过一个例子来加强一下对 Socket 编
+				程的理解。聊天室程序需求我们要实现的是简单的聊天室的例子， 
+				就是允许多个人同时一起聊天，每个人发送的消息所...
+				编程， 通过分别写服务端和客户端的代码了
+				解基本的 Python Socket 编程模型。
+				本文再通过一个例子来加强一下对 Socket 编
+				程的理解。聊天室程序需求我们要实现的是简单的聊天室的例子， 
+				就是允许多个人同时一起聊天，每个人发送的消息所...
+				编程， 通过分别写服务端和客户端的代码了
+				解基本的 Python Socket 编程模型。
+				本文再通过一个例子来加强一下对 Socket 编
+				程的理解。聊天室程序需求我们要实现的是简单的聊天室的例子， 
+				就是允许多个人同时一起聊天，每个人发送的消息所...
+				编程， 通过分别写服务端和客户端的代码了
+				解基本的 Python Socket 编程模型。
+				本文再通过一个例子来加强一下对 Socket 编
+				程的理解。聊天室程序需求我们要实现的是简单的聊天室的例子， 
+				就是允许多个人同时一起聊天，每个人发送的消息所...
+				编程， 通过分别写服务端和客户端的代码了
+				解基本的 Python Socket 编程模型。
+				本文再通过一个例子来加强一下对 Socket 编
+				程的理解。聊天室程序需求我们要实现的是简单的聊天室的例子， 
+				就是允许多个人同时一起聊天，每个人发送的消息所...
+				编程， 通过分别写服务端和客户端的代码了
+				解基本的 Python Socket 编程模型。
+				本文再通过一个例子来加强一下对 Socket 编
+				程的理解。聊天室程序需求我们要实现的是简单的聊天室的例子， 
+				就是允许多个人同时一起聊天，每个人发送的消息所...
+				
+			</div>
+		</div>
+		<div id="div2">
+
+		</div>
+	</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#div1 {
+				width: 150px;
+				height: 200px;
+				background: green;
+				position: absolute;
+				left: -150px;
+			}
+			#div1 span {
+				position: absolute;
+				width: 20px;
+				height: 60px;
+				line-height: 20px;
+				background: blue;
+				right: -20px;
+				top: 70px;
+			}
+		</style>
+		<script type="text/javascript">
+			window.onload=function(){
+				var oDiv=document.getElementById("div1");
+				
+				oDiv.onmouseover=function(){
+					startMove(0);
+				};
+				
+				oDiv.onmouseout=function(){
+					startMove(-150);
+				};
+			}
+			
+			var time=null;
+			
+			/*
+			 
+			 *  假设 
+			 * 		left:30 		iTarget:300  得出	往右  为正
+			 * 		left:600 		iTarget:50     得出	往左  为负
+			 * 
+			 * 通过当前位置left 与目标点的 关系 iTarget 推断出 速度的正负
+			 * 
+			 * */
+			
+			function startMove(iTraget){
+				var oDiv=document.getElementById("div1");
+				
+				clearInterval(time);
+				
+				time=setInterval(function(){
+					var speed=0;
+					
+					if(oDiv.offsetLeft>iTraget){
+						speed=-10;
+					}else{
+						speed=10;
+					}
+					
+					if(oDiv.offsetLeft==iTraget){
+						clearInterval(time);
+					}else{
+						oDiv.style.left=oDiv.offsetLeft+speed+'px';
+					}
+				},30);
+			}
+		</script>
+	</head>
+
+	<body>
+		<div id="div1">
+			<span>
+				分享到
+			</span>
+		</div>
+	</body>
+
+</html>
